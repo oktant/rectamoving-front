@@ -1,0 +1,188 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto" style="margin-top:10%">
+          <div class="card-group">
+            <div class="card p-4">
+                  <form (ngSubmit)="onRegister(f)" #f="ngForm">
+                    <h1>Sign up</h1>
+                    <br>
+                    <br>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input type="text" name="firstName" ngModel class="form-control" placeholder="First Name"  required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input type="text" class="form-control" name="lastName" ngModel placeholder="Last Name" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input type="text" class="form-control" name="city" ngModel placeholder="City" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+
+                      <select class="form-control" [(ngModel)]="selectedCountry" name="country">
+
+                        <option *ngIf="selectedCountry==0" value='0'>Select Country</option>
+
+                        <option *ngFor="let country of countries" [(ngValue)]="country.id">{{country.countryName}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+
+                      </div>
+                      <div class="input-group-prepend" style="margin-right:5px">
+                        <div *ngIf="selectedCountry!=0">
+                          <input type="text" class="form-control" style="width:60px"placeholder="Phone Number" required [value]="getPhoneCode(selectedCountry)" disabled>
+                        </div>
+                      </div>
+
+                      <input type="number" class="form-control"  name="phoneNumber" ngModel  placeholder="Phone Number" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                      </div>
+                      <input type="email" class="form-control"  name="email" ngModel  placeholder="Email" required email>
+                    </div>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input type="password" class="form-control" placeholder="Password"
+                             autocomplete="current-password"  name="password" ngModel
+                             required>
+                    </div>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                      </div>
+                      <input type="password" class="form-control" placeholder="Confirm Password"
+                             autocomplete="current-password" name="confirmPassword" ngModel required>
+                    </div>
+                    <div class="input-group mb-4">
+                      <div class="row">
+                        <div class="mb-2 input-group-prepend" style="padding-left:20px">
+                          <input type="checkbox" id="acceptTermsCorporate" name="acceptTermsCorporate" ngModel required>
+                        </div>
+                        <div class="mb-3" style="text-align: left">
+
+                          <p class="message" style="margin: 0%; padding-left:10px; font-size:13px">I accept <a [routerLink]="" style="cursor:pointer"
+                                                                                                               (click)="openTerms(content)" > Terms and
+                            Conditions</a>
+                            and confirm a review of our <a [routerLink]="" style="cursor:pointer"
+                                                           (click)="openPrivacy(privacy)">Privacy Policy</a></p>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div [hidden]="!messageShow" style="font-size:14px" [style.color]="messageColor">{{validMessage}}</div>
+
+                    <div class="row">
+                      <div class="col-6">
+
+                        <button type="submit"  [disabled]="!f.valid" class="btn btn-primary px-4" style="background-color: #34ccff">Sign up</button>
+                      </div>
+                    </div>
+                  </form>
+            </div>
+          </div>
+          <p class="message">Already registered? <a routerLink="/login">Login</a></p>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Terms and Conditions</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+      of Lorem Ipsum.
+
+      Why do we use it?
+      It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+      its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
+      opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing
+      packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will
+      uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by
+      accident, sometimes on purpose (injected humour and the like).
+
+
+      Where does it come from?
+      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+      literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+      College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+      going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes
+      from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+      written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first
+      line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+      The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
+      and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+      accompanied by English versions from the 1914 translation by H. Rackham.
+
+      Where can I get some?
+      There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some
+      form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a
+      passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All
+      the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first
+      true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model
+      sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always
+      free from repetition, injected humour, or non-characteristic words etc.</p>
+  </div>
+  <div class="modal-footer">
+    <button style="background-color: #34ccff; color: #FFFFFF;" type="button" class="btn btn-light"
+            (click)="modal.close('Close click')">Close
+    </button>
+  </div>
+</ng-template>
+
+
+<ng-template #privacy let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Privacy Policy</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+      of Lorem Ipsum.
+
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button style="background-color: #34ccff; color: #FFFFFF;" type="button" class="btn btn-light"
+            (click)="modal.close('Close click')">Close
+    </button>
+  </div>
+</ng-template>
