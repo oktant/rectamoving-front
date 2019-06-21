@@ -38,7 +38,7 @@ import { ForgotPasswordComponent } from './container/auth/login/forgot-password/
     AboutusComponent,
     IndexComponent,
     AuthComponent,
-    TabsComponent,
+:    TabsComponent,
     TabComponent,
 
     RegisterComponent,
